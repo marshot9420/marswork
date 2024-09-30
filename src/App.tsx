@@ -1,5 +1,5 @@
 function App() {
-  return <div>MarsWork</div>;
+  return <div>MarsWork</div>
 }
 
-export default App;
+export default App

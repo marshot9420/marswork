@@ -9,17 +9,17 @@ const color = {
   dimGray: "#EDEDEF",
   dimBeige: "#F9F9F7",
 
+  mars: "#CA8147",
+
   red: "#ff0000",
   green: "#1C9C6C",
   blue: "#2FA4FF",
   yellow: "#FFD700",
-
-  coral: "#f55353",
 };
 
 export const theme = {
   color: {
-    primary: color.coral,
+    primary: color.mars,
 
     font: color.black,
     fontReverse: color.white,

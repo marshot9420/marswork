@@ -27,8 +27,8 @@
   white-space: nowrap;
 
   animation:
-    quoteTyping 3s steps(34, end) both,
-    quoteCursor 0.8s step-end infinite;
+    quoteTyping 1.3s steps(22),
+    quoteCursor 0.5s step-end infinite alternate;
 }
 
 .footer__quotes--content::before {

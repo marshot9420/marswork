@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 
 /* 설정 */
+@import "./configs/variables.css";
 @import "./configs/reset.css";
 
 /* 레이아웃 스타일 */
@@ -18,8 +19,8 @@ body {
   line-height: 1.7;
   font-family: "Noto Sans KR", sans-serif;
 
-  color: #0c0c0c;
-  background-color: #faf9f6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
 #root {

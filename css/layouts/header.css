@@ -9,6 +9,12 @@
   padding: 0 1rem 0 1rem;
 }
 
+.header__center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
 .header__right {
   display: flex;
   gap: 1rem;

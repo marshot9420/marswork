@@ -5,4 +5,6 @@
 
 @import "./clock/clock.css";
 
+@import "./greeting/greeting.css";
+
 @import "./favorites/favorite-item.css";

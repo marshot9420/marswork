@@ -1,7 +1,7 @@
-export function controlMenuPanel() {
-  const menuButton = document.querySelector(".header-action");
-  const headerMenu = document.querySelector(".header-menu");
+const menuButton = document.querySelector(".header-action");
+const headerMenu = document.querySelector(".header-menu");
 
+export function controlMenuPanel() {
   if (!menuButton || !headerMenu) return;
 
   menuButton.addEventListener("click", () => {

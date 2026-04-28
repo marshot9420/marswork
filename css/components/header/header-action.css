@@ -48,4 +48,10 @@
   flex-shrink: 0;
 
   color: var(--color-muted);
+
+  transition: transform 0.2s ease;
+}
+
+.header-action.is-active .header-action__icon {
+  transform: rotate(180deg);
 }

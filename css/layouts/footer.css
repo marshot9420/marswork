@@ -1,11 +1,91 @@
 .footer {
-  height: 10rem;
+  height: var(--footer-height);
+  padding: 0 var(--space-4);
 
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .footer__quotes {
+  max-width: 72rem;
+  width: 100%;
+
+  padding: var(--space-3) var(--space-4);
+
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+
+  text-align: center;
+  color: var(--color-text);
+}
+
+.footer__quotes--content {
+  overflow: hidden;
+  white-space: nowrap;
+
+  animation:
+    quoteTyping 3s steps(34, end) both,
+    quoteCursor 0.8s step-end infinite;
+}
+
+.footer__quotes--content::before {
+  content: "“";
+  color: var(--color-muted);
+}
+
+.footer__quotes--content::after {
+  content: "”";
+  color: var(--color-muted);
+}
+
+.footer__quotes--author {
+  color: var(--color-muted);
+
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .footer {
+    height: auto;
+    min-height: var(--footer-height);
+    padding: var(--space-3);
+  }
+
+  .footer__quotes {
+    padding: var(--space-2);
+  }
+
+  .footer__quotes--content {
+    font-size: 1.3rem;
+  }
+
+  .footer__quotes--author {
+    font-size: 1.1rem;
+  }
+}
+
+@keyframes quoteTyping {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes quoteCursor {
+  0%,
+  100% {
+    border-right: 1px solid transparent;
+  }
+
+  50% {
+    border-right: 1px solid var(--color-muted);
+  }
 }

@@ -1,13 +1,5 @@
-.header__center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 0 var(--space-4);
-}
-
 #search {
   width: 100%;
-  max-width: 48rem;
   height: 3.6rem;
 
   padding: 0 var(--space-4);

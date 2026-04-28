@@ -2,3 +2,5 @@
 @import "./header/header-action.css";
 @import "./header/header-menu.css";
 @import "./header/header-status.css";
+
+@import "./favorites/favorite-item.css";

@@ -4,15 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarsWork</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
     <div id="root">
-      <header class="header">Header</header>
-      <main>Main</main>
-      <footer>Footer</footer>
+      <header class="header">
+        <div class="header__left">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="icon chevron-right"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </div>
+
+        <div class="header__center">
+          <input id="search" type="text" />
+        </div>
+
+        <div class="header__right">
+          <div class="header__right--deadline">Deadline</div>
+          <div class="header__right--weather">Weather</div>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="main__content main__favorites">Favorites</div>
+        <div class="main__content main__clock">Clock</div>
+        <div class="main__content main__todo-form">Todo Form</div>
+        <div class="main__content main__calendar">Calendar</div>
+        <div class="main__content main__greeting">Greeting</div>
+        <div class="main__content main__todos">Todos</div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer__quotes">
+          <div class="footer__quotes--content">Quote</div>
+          <div class="footer__quotes--author">Author</div>
+        </div>
+      </footer>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>

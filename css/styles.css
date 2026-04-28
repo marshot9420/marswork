@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 
-@import "configs/reset.css";
+/* 설정 */
+@import "./configs/reset.css";
+
+/* 레이아웃 스타일 */
+@import "./layouts/layouts.css";
 
 html {
   display: grid;
@@ -20,6 +24,9 @@ body {
 
 #root {
   min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 *,
@@ -68,4 +75,9 @@ h6 {
 small {
   color: #767676;
   font-size: 1.4rem;
+}
+
+.icon {
+  width: 2.4rem;
+  height: 2.4rem;
 }

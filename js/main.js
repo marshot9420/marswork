@@ -1,3 +1,3 @@
-import { controlMenuPanel } from "./features/layouts/panel.js";
+import { controlMenuPanel } from "./layouts/panel.js";
 
 controlMenuPanel();

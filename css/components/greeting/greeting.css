@@ -4,7 +4,7 @@
 }
 
 .greeting {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
@@ -14,9 +14,8 @@
 }
 
 .greeting__message {
-  width: 0;
-  overflow: hidden;
-  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(8px);
 
   color: var(--color-muted);
 
@@ -26,13 +25,12 @@
 
   letter-spacing: 0.08em;
 
-  animation: greetingMessageTyping 1.3s steps(8, end) forwards;
+  animation: greetingFadeIn 0.6s ease forwards;
 }
 
 .greeting__name {
-  width: 0;
-  overflow: hidden;
-  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(8px);
 
   color: var(--color-text);
 
@@ -42,18 +40,13 @@
 
   letter-spacing: 0.04em;
 
-  animation: greetingNameTyping 1s steps(5, end) forwards 1.3s;
+  animation: greetingFadeIn 0.6s ease forwards 0.4s;
 }
 
-@keyframes greetingMessageTyping {
+@keyframes greetingFadeIn {
   to {
-    width: 8.7em;
-  }
-}
-
-@keyframes greetingNameTyping {
-  to {
-    width: 5.3em;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

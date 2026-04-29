@@ -177,7 +177,15 @@
             <span class="clock__time">00:00:00</span>
           </div>
         </div>
-        <div class="main__content main__todo-form">Todo Form</div>
+        <div class="main__content main__todo-form">
+          <form id="todo-form">
+            <input
+              id="todo-input"
+              type="text"
+              placeholder="What is to do today?"
+            />
+          </form>
+        </div>
         <div class="main__content main__calendar">Calendar</div>
         <div class="main__content main__greeting main__login">
           <div class="greeting hidden">
@@ -194,7 +202,103 @@
             />
           </form>
         </div>
-        <div class="main__content main__todos">Todos</div>
+        <div class="main__content main__todos">
+          <ul class="todos">
+            <li class="todo">
+              <input class="todo-checkbox" type="checkbox" />
+              <span class="todo-content">TODO</span>
+
+              <button
+                class="todo-action todo-action--edit"
+                type="button"
+                aria-label="Edit todo"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="todo-action__icon"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L8.582 18.07a4.5 4.5 0 0 1-1.897 1.13L3.75 20.25l1.05-2.935a4.5 4.5 0 0 1 1.13-1.897L16.862 4.487Z"
+                  />
+                </svg>
+              </button>
+
+              <button
+                class="todo-action todo-action--delete"
+                type="button"
+                aria-label="Delete todo"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="todo-action__icon"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m14.74 9-.346 9M9.606 18 9.26 9M19.5 6.75l-.867 12.142A2.25 2.25 0 0 1 16.389 21H7.611a2.25 2.25 0 0 1-2.244-2.108L4.5 6.75M9.75 6.75V4.5A1.5 1.5 0 0 1 11.25 3h1.5a1.5 1.5 0 0 1 1.5 1.5v2.25M3.75 6.75h16.5"
+                  />
+                </svg>
+              </button>
+            </li>
+
+            <li class="todo todo--done">
+              <input class="todo-checkbox" type="checkbox" checked />
+              <span class="todo-content">DONE TODO</span>
+
+              <button
+                class="todo-action todo-action--edit"
+                type="button"
+                aria-label="Edit todo"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="todo-action__icon"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L8.582 18.07a4.5 4.5 0 0 1-1.897 1.13L3.75 20.25l1.05-2.935a4.5 4.5 0 0 1 1.13-1.897L16.862 4.487Z"
+                  />
+                </svg>
+              </button>
+
+              <button
+                class="todo-action todo-action--delete"
+                type="button"
+                aria-label="Delete todo"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="todo-action__icon"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m14.74 9-.346 9M9.606 18 9.26 9M19.5 6.75l-.867 12.142A2.25 2.25 0 0 1 16.389 21H7.611a2.25 2.25 0 0 1-2.244-2.108L4.5 6.75M9.75 6.75V4.5A1.5 1.5 0 0 1 11.25 3h1.5a1.5 1.5 0 0 1 1.5 1.5v2.25M3.75 6.75h16.5"
+                  />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
       </main>
 
       <footer class="footer">

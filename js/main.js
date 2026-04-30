@@ -1,3 +1,4 @@
+import { initCalendar } from "./features/calendar.js";
 import { getCurrentDate } from "./features/clock.js";
 import { handleLoginEvent } from "./features/login.js";
 import { getQuote } from "./features/quotes.js";
@@ -12,3 +13,4 @@ getQuote();
 addTodo();
 loadSavedTodos();
 getCurrentWeather();
+initCalendar();

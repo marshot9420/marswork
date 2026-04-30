@@ -66,6 +66,15 @@
   overflow-y: auto;
 }
 
+.todos::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todos::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+}
+
 .todo {
   min-width: 0;
   min-height: 4.4rem;

@@ -1,145 +1,129 @@
 const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo-input");
+
 const todos = document.querySelector(".todos");
 
 const TODOS_KEY = "todos";
-const SVG_NS = "http://www.w3.org/2000/svg";
 
 let todoItems = [];
 
-function saveTodos() {
-  localStorage.setItem(TODOS_KEY, JSON.stringify(todoItems));
-}
-
-function createSvgIcon(pathD) {
-  const svg = document.createElementNS(SVG_NS, "svg");
-  svg.setAttribute("xmlns", SVG_NS);
-  svg.setAttribute("fill", "none");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("stroke-width", "1.5");
-  svg.setAttribute("stroke", "currentColor");
-
-  const path = document.createElementNS(SVG_NS, "path");
-  path.setAttribute("stroke-linecap", "round");
-  path.setAttribute("stroke-linejoin", "round");
-  path.setAttribute("d", pathD);
-
-  svg.appendChild(path);
-
-  return svg;
-}
-
-function createTodoButton({ className, ariaLabel, pathD }) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.setAttribute("aria-label", ariaLabel);
-  button.classList.add("todo-action", className);
-
-  const icon = createSvgIcon(pathD);
-  icon.classList.add("todo-action__icon");
-
-  button.appendChild(icon);
-
-  return button;
-}
-
-function createCheckbox() {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.classList.add("todo-checkbox");
-  checkbox.addEventListener("change", handleCheckTodo);
-
-  return checkbox;
-}
-
-function createTodoContent(content) {
-  const span = document.createElement("span");
-  span.classList.add("todo-content");
-  span.innerText = content;
-
-  return span;
-}
-
-function createEditButton() {
-  const editPath =
-    "m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L8.582 18.07a4.5 4.5 0 0 1-1.897 1.13L3.75 20.25l1.05-2.935a4.5 4.5 0 0 1 1.13-1.897L16.862 4.487Z";
-
-  const button = createTodoButton({
-    className: "todo-action--edit",
-    ariaLabel: "TODO 수정",
-    pathD: editPath,
-  });
-
-  button.addEventListener("click", handleEditTodo);
-
-  return button;
-}
-
-function createDeleteButton() {
-  const deletePath =
-    "m14.74 9-.346 9M9.606 18 9.26 9M19.5 6.75l-.867 12.142A2.25 2.25 0 0 1 16.389 21H7.611a2.25 2.25 0 0 1-2.244-2.108L4.5 6.75M9.75 6.75V4.5A1.5 1.5 0 0 1 11.25 3h1.5a1.5 1.5 0 0 1 1.5 1.5v2.25M3.75 6.75h16.5";
-
-  return createTodoButton({
-    className: "todo-action--delete",
-    ariaLabel: "TODO 삭제",
-    pathD: deletePath,
-  });
-}
-
-function createTodoElement(todo) {
+function paintTodo(newTodo) {
   const li = document.createElement("li");
-  li.id = todo.id;
+  li.id = newTodo.id;
   li.classList.add("todo");
 
-  const checkbox = createCheckbox();
-  const content = createTodoContent(todo.content);
-  const editButton = createEditButton();
-  const deleteButton = createDeleteButton();
+  const checkbox = document.createElement("input");
+  checkbox.classList.add("todo-checkbox");
+  checkbox.setAttribute("type", "checkbox");
 
-  li.append(checkbox, content, editButton, deleteButton);
+  const span = document.createElement("span");
+  span.innerText = newTodo.content;
+  span.classList.add("todo-content");
 
-  return li;
-}
+  const SVG_NS = "http://www.w3.org/2000/svg";
 
-function paintTodo(todo) {
-  const todoElement = createTodoElement(todo);
-  todos.appendChild(todoElement);
+  const editTodoButton = document.createElement("button");
+  editTodoButton.classList.add("todo-action", "todo-action--edit");
+  editTodoButton.setAttribute("type", "button");
+  editTodoButton.setAttribute("aria-label", "TODO 수정");
+
+  const editTodoButtonSvg = document.createElementNS(SVG_NS, "svg");
+  editTodoButtonSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  editTodoButtonSvg.setAttribute("fill", "none");
+  editTodoButtonSvg.setAttribute("viewBox", "0 0 24 24");
+  editTodoButtonSvg.setAttribute("stroke-width", "1.5");
+  editTodoButtonSvg.setAttribute("stroke", "currentColor");
+  editTodoButtonSvg.classList.add("todo-action__icon");
+
+  const editTodoButtonIcon = document.createElementNS(SVG_NS, "path");
+  editTodoButtonIcon.setAttribute("stroke-linecap", "round");
+  editTodoButtonIcon.setAttribute("stroke-linejoin", "round");
+  editTodoButtonIcon.setAttribute(
+    "d",
+    "m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L8.582 18.07a4.5 4.5 0 0 1-1.897 1.13L3.75 20.25l1.05-2.935a4.5 4.5 0 0 1 1.13-1.897L16.862 4.487Z",
+  );
+
+  editTodoButtonSvg.appendChild(editTodoButtonIcon);
+  editTodoButton.appendChild(editTodoButtonSvg);
+
+  const deleteTodoButton = document.createElement("button");
+  deleteTodoButton.classList.add("todo-action", "todo-action--delete");
+  deleteTodoButton.setAttribute("type", "button");
+  deleteTodoButton.setAttribute("aria-label", "TODO 삭제");
+
+  const deleteTodoButtonSvg = document.createElementNS(SVG_NS, "svg");
+  deleteTodoButtonSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  deleteTodoButtonSvg.setAttribute("fill", "none");
+  deleteTodoButtonSvg.setAttribute("viewBox", "0 0 24 24");
+  deleteTodoButtonSvg.setAttribute("stroke-width", "1.5");
+  deleteTodoButtonSvg.setAttribute("stroke", "currentColor");
+  deleteTodoButtonSvg.classList.add("todo-action__icon");
+
+  const deleteTodoButtonIcon = document.createElementNS(SVG_NS, "path");
+  deleteTodoButtonIcon.setAttribute("stroke-linecap", "round");
+  deleteTodoButtonIcon.setAttribute("stroke-linejoin", "round");
+  deleteTodoButtonIcon.setAttribute(
+    "d",
+    "m14.74 9-.346 9M9.606 18 9.26 9M19.5 6.75l-.867 12.142A2.25 2.25 0 0 1 16.389 21H7.611a2.25 2.25 0 0 1-2.244-2.108L4.5 6.75M9.75 6.75V4.5A1.5 1.5 0 0 1 11.25 3h1.5a1.5 1.5 0 0 1 1.5 1.5v2.25M3.75 6.75h16.5",
+  );
+
+  deleteTodoButtonSvg.appendChild(deleteTodoButtonIcon);
+  deleteTodoButton.appendChild(deleteTodoButtonSvg);
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  li.appendChild(editTodoButton);
+  li.appendChild(deleteTodoButton);
+
+  todos.appendChild(li);
+
+  checkbox.addEventListener("change", checkTodo);
+
+  editTodoButton.addEventListener("click", editTodo);
+  deleteTodoButton.addEventListener("click", deleteTodo);
 }
 
 function handleTodoSubmit(event) {
   event.preventDefault();
-
-  const content = todoInput.value.trim();
-
-  if (content === "") return;
-
-  const newTodo = {
-    id: Date.now(),
-    content,
-  };
-
-  todoItems.push(newTodo);
-  paintTodo(newTodo);
-  saveTodos();
-
+  const newTodo = todoInput.value;
   todoInput.value = "";
+  const newTodoObject = {
+    id: Date.now(),
+    content: newTodo,
+  };
+  todoItems.push(newTodoObject);
+  paintTodo(newTodoObject);
+
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todoItems));
 }
 
-function handleCheckTodo(event) {
-  const currentTodoItem = event.target.closest(".todo");
-
-  currentTodoItem.classList.toggle("todo--done", event.target.checked);
+export function addTodo() {
+  todoForm.addEventListener("submit", handleTodoSubmit);
 }
 
-function handleEditTodo(event) {
+function checkTodo(event) {
+  const currentLi = event.target.closest(".todo");
+
+  if (event.target.checked) {
+    currentLi.classList.add("todo--done");
+  } else {
+    currentLi.classList.remove("todo--done");
+  }
+}
+
+function editTodo(event) {
   const currentTodoItem = event.target.closest(".todo");
   const currentSpan = currentTodoItem.querySelector(".todo-content");
 
-  if (currentTodoItem.querySelector(".todo-edit-input")) return;
+  if (currentTodoItem.querySelector("input[type='text']")) return;
 
-  const editInput = createEditInput(currentSpan.innerText);
+  const editInput = document.createElement("input");
+  editInput.type = "text";
+  editInput.value = currentSpan.innerText;
+  editInput.classList.add("todo-edit-input");
 
   currentSpan.replaceWith(editInput);
+
   editInput.focus();
 
   function saveEdit() {
@@ -150,9 +134,17 @@ function handleEditTodo(event) {
       return;
     }
 
-    updateTodoContent(currentTodoItem, editedValue);
-    replaceInputWithSpan(editInput, editedValue);
-    saveTodos();
+    const newSpan = document.createElement("span");
+    newSpan.classList.add("todo-content");
+    newSpan.innerText = editInput.value;
+
+    editInput.replaceWith(newSpan);
+
+    const id = Number(currentTodoItem.id);
+    const targetTodo = todoItems.find((todo) => todo.id === id);
+    targetTodo.content = editInput.value;
+
+    localStorage.setItem(TODOS_KEY, JSON.stringify(todoItems));
   }
 
   editInput.addEventListener("blur", saveEdit);
@@ -164,38 +156,22 @@ function handleEditTodo(event) {
   });
 }
 
-function createEditInput(value) {
-  const input = document.createElement("input");
-  input.type = "text";
-  input.value = value;
-  input.classList.add("todo-edit-input");
-
-  return input;
-}
-
-function updateTodoContent(todoElement, content) {
-  const id = Number(todoElement.id);
-  const targetTodo = todoItems.find((todo) => todo.id === id);
-
-  if (!targetTodo) return;
-
-  targetTodo.content = content;
-}
-
-function replaceInputWithSpan(input, content) {
-  const span = createTodoContent(content);
-  input.replaceWith(span);
-}
-
-export function addTodo() {
-  todoForm.addEventListener("submit", handleTodoSubmit);
+function deleteTodo(event) {
+  const currentTodoItem = event.target.closest(".todo");
+  console.log("currentTodoItem: ", currentTodoItem);
+  currentTodoItem.remove();
+  todoItems = todoItems.filter(
+    (todoItem) => todoItem.id !== parseInt(currentTodoItem.id),
+  );
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todoItems));
 }
 
 export function loadSavedTodos() {
   const savedTodos = localStorage.getItem(TODOS_KEY);
 
-  if (savedTodos === null) return;
-
-  todoItems = JSON.parse(savedTodos);
-  todoItems.forEach(paintTodo);
+  if (savedTodos !== null) {
+    const parsedTodos = JSON.parse(savedTodos);
+    todoItems = parsedTodos;
+    parsedTodos.forEach(paintTodo);
+  }
 }
